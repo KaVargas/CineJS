@@ -16,6 +16,7 @@ function clientes(numeroClientes) {
 }
 
 
+
 function generar_edad_precio() {
     var edad = Math.floor(Math.random() * 66) + 5;
     var precio;
