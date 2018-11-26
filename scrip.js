@@ -13,10 +13,18 @@ var precio;
 var pelicula;
 var recaudacion = [0, 0, 0, 0, 0];
 
+var recaudacion2 = [
+    "Bohemian rhapsody", 0,
+    "Venon", 0,
+    "Avengers 4", 0,
+    "Toy story 4", 0,
+    "Animales fantasticos", 0
+];
+
 function generarClientes(numeroClientes) {
 
     for (var i = 0; i < numeroClientes; i++) {
-        cli.push("cliente " + (numeroClientes - i));
+        cli.push("cliente " + (i+1));
     }
     imprimirArray(cli, "clientes");
 }
@@ -59,13 +67,14 @@ function generar_peli() {
 
 function comprar() {
     if (cli.length >= 1) {
-        cli.pop();
-        imprimirArray(cli, "clientes");
         generar_edad_precio();
         generar_peli();
-        var numero_pelicula = movies.indexOf(pelicula);
-        recaudacion[numero_pelicula] += precio;
-
+        var numero_pelicula = recaudacion2.indexOf(pelicula);
+        recaudacion2[numero_pelicula+1] += precio;
+        //imprimirArray(recaudacion, "pRecaudacion");
+        imprimirArray(recaudacion2, "pRecaudacion2");
+        cli.shift();
+        imprimirArray(cli, "clientes");
     }
     else{
         alert("Ya no hay clientes, buen trabajo!");
@@ -76,5 +85,5 @@ function main() {
     generarClientes(numeroClientes);
     generar_edad_precio();
     generar_peli();
-
+    imprimirArray(recaudacion2, "pRecaudacion2");
 }
