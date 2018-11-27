@@ -17,21 +17,28 @@
     <title>LABORATORIO</title>
 </head>
 
-<body onload="main()">
+<body onload="init()">
     <!--Division de tres columnas con Bootstrap-->
     <div class="row">
         <div class="col-sm-3" style="background-color:lavender;">
             <p id="clientes"></p>
         </div>
         <div class="col-sm-6" style="background-color:lavenderblush;">
+            <h1 id="cliente"></h1>
             <p id="edad"></p>
             <p id="pelicula"></p>
             <p id="precio"></p>
+
+            <div class="col-sm-3" style="background-color:lavenderblush;">
+                <button onclick="limpiar()">Limpiar</button>
+            </div>
+            <div class="col-sm-3" style="background-color:lavenderblush;">
+                <button onclick="generar()">Generar</button>
+            </div>
         </div>
         <div class="col-sm-3" style="background-color:lightseagreen;">
             <button id="btnComprar" onclick="comprar()">Comprar</button>
             <p id="pRecaudacion"></p>
-            <p id="pRecaudacion2"></p>
         </div>
     </div>
 </body>

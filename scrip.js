@@ -1,19 +1,11 @@
 
-var numeroClientes = Math.floor(Math.random() * 31);
+
 var cli = new Array();
-var movies = [
-    "Bohemian rhapsody",
-    "Venon",
-    "Avengers 4",
-    "Toy story 4",
-    "Animales fantasticos"
-];
 var edad;
 var precio;
 var pelicula;
-var recaudacion = [0, 0, 0, 0, 0];
-
-var recaudacion2 = [
+var limpio = true;
+var movies = [
     "Bohemian rhapsody", 0,
     "Venon", 0,
     "Avengers 4", 0,
@@ -24,7 +16,7 @@ var recaudacion2 = [
 function generarClientes(numeroClientes) {
 
     for (var i = 0; i < numeroClientes; i++) {
-        cli.push("cliente " + (i+1));
+        cli.push("cliente " + (i + 1));
     }
     imprimirArray(cli, "clientes");
 }
@@ -40,11 +32,14 @@ function imprimirArray(lista, identificador) {
 }
 
 
-function generar_edad_precio() {
+function generar_edad() {
     edad = Math.floor(Math.random() * 66) + 5;
-    precio;
-    document.getElementById("edad").innerHTML = edad;
+    document.getElementById("cliente").innerHTML = cli[0];
+    document.getElementById("edad").innerHTML = "Edad: " + edad;
 
+}
+
+function generar_precio() {
     if (edad >= 5 && edad <= 10) {
         precio = 2;
     }
@@ -55,35 +50,60 @@ function generar_edad_precio() {
         precio = 4;
     }
 
-    document.getElementById("precio").innerHTML = precio;
-
+    document.getElementById("precio").innerHTML = "Precio: " + precio;
 }
 
 function generar_peli() {
-    var npeli = Math.floor(Math.random() * 5);
+    npeli = 1;
+    while (npeli % 2 != 0)
+        var npeli = Math.floor(Math.random() * 5);
     pelicula = movies[npeli];
-    document.getElementById("pelicula").innerHTML = movies[npeli];
+    document.getElementById("pelicula").innerHTML = "Pelicula: " + movies[npeli];
 }
 
 function comprar() {
-    if (cli.length >= 1) {
-        generar_edad_precio();
-        generar_peli();
-        var numero_pelicula = recaudacion2.indexOf(pelicula);
-        recaudacion2[numero_pelicula+1] += precio;
-        //imprimirArray(recaudacion, "pRecaudacion");
-        imprimirArray(recaudacion2, "pRecaudacion2");
+    if (cli.length >= 1 && !limpio) {
+        var numero_pelicula = movies.indexOf(pelicula);
+        movies[numero_pelicula + 1] += precio;
+        imprimirArray(movies, "pRecaudacion");
         cli.shift();
         imprimirArray(cli, "clientes");
+        limpiar();
+        document.getElementById("cliente").innerHTML = "cliente X";
     }
-    else{
+    else if (limpio) {
+        alert("Genera datos para seguir con la venta");
+    }
+    else {
         alert("Ya no hay clientes, buen trabajo!");
     }
 }
 
-function main() {
+function generar() {
+    if (cli.length >= 1) {
+        generar_edad();
+        generar_precio();
+        generar_peli();
+        limpio = false;
+    }
+    else {
+        alert("Ya no hay clientes, buen trabajo!");
+    }
+}
+
+function limpiar() {
+    pelicula = "";
+    edad = "";
+    precio = "";
+    limpio = true;
+    document.getElementById("edad").innerHTML = "Edad: ";
+    document.getElementById("pelicula").innerHTML = "Pelicula: ";
+    document.getElementById("precio").innerHTML = "Precio: ";
+    document.getElementById("cliente").innerHTML = "cliente X";
+}
+
+function init() {
+    var numeroClientes = Math.floor(Math.random() * 31);
     generarClientes(numeroClientes);
-    generar_edad_precio();
-    generar_peli();
-    imprimirArray(recaudacion2, "pRecaudacion2");
+    imprimirArray(movies, "pRecaudacion");
 }
